@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <style>
+ 
+
+  #body
+  {
+    background-color:lightblue; 
+  }
+  #middle,#im{
+    align-items: center;
+    position:relative;
+    top:30px;
+    left:260px;
+    z-index: 1;
+  }
+  #myCanvas{
+     align-items: center;
+    position:relative;
+    top:30px;
+    left:260px;
+    z-index: 2;
+  }
+
+</style>
+  </head>
+  <body id="body" onload="init();">
+    <div class="cointainer">
+     <ul class="nav nav-tabs" role="tablist">
+       <li class="active"><button type="button" onclick="startWebcam();"class="mdl-button mdl-js-button mdl-js-ripple-effect">
+          Camera
+        </button></li>
+        
+       <li><button onclick="snapshot();"class="mdl-button mdl-js-button mdl-js-ripple-effect">
+          Capture
+        </button></li>
+     
+      <li><button type="button" onclick="retake();" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+          Retake
+        </button></li>
+   </ul>
+ </div>
+  <div id=middle>
+    <div id="vid">
+    <video onclick="snapshot(this);" width=600 height=600 id="video" autoplay></video>
+  </div></div>
+  <div id="pic">
+      <canvas  id="myCanvas" width=600 height=600></canvas>  
+      </div>
+      <br><br><br><br>
+      <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" src="index2.html">Home</a>
+  </body>
+  <script>
+          navigator.getUserMedia = ( navigator.getUserMedia ||
+                             navigator.webkitGetUserMedia ||
+                             navigator.mozGetUserMedia ||
+                             navigator.msGetUserMedia);
+
+      var video;
+      var webcamStream;
+document.getElementById("myCanvas").style.display="none"; 
+      function startWebcam() {
+        if (navigator.getUserMedia) {
+           navigator.getUserMedia (
+
+              
+              {
+                 video: true,
+                 audio: false
+              },
+
+            
+              function(localMediaStream) {
+                  video = document.querySelector('video');
+                 video.src = window.URL.createObjectURL(localMediaStream);
+                 webcamStream = localMediaStream;
+              },
+
+            
+              function(err) {
+                 console.log("The following error occured: " + err);
+              }
+           );
+        } else {
+           console.log("getUserMedia not supported");
+        }  
+      //  document.getElementById("myCanvas").style.display="none"; 
+      }
+
+    
+      //---------------------
+      // TAKE A SNAPSHOT CODE
+      //---------------------
+      var canvas, ctx;
+
+      function init() {
+        // Get the canvas and obtain a context for
+        // drawing in it
+        canvas = document.getElementById("myCanvas");
+        ctx = canvas.getContext('2d');
+      }
+
+      function snapshot() {
+         // Draws current image from the video element into the canvas
+        ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+     // var dataUrl = canvas.toDataURL();
+     var myImage = canvas.toDataURL("image/jpg");
+document.getElementById("vid").style.display="none";
+ document.getElementById("myCanvas").style.display="block"; 
+ //imgg.setAttribute("src",myImage);
+//window.open(dataUrl, "toDataURL() image", "width=600, height=200");
+      }
+      function retake()
+      {
+       document.getElementById("vid").style.display="block"; 
+      document.getElementById("myCanvas").style.display="none"; 
+       startWebcam();
+      }
+
+/*
+
+     / function download_my_canvas() {
+      //  alert("fgj");
+var canvas  = document.getElementById("myCanvas");
+var dataUrl = canvas.toDataURL();
+var myImage = canvas1.toDataURL("image/png");
+
+window.open(dataUrl, "toDataURL() image", "width=600, height=200");
+}*/
+  </script>
+
+
+
