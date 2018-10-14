@@ -9,7 +9,15 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <style>
-
+#upload{
+  
+  position:relative;
+    transition: .5s ease;
+    top: 10px;
+    left: 620px;
+    right: -320px;
+    bottom: -191px;
+    }
  .photo1{
      
      width: 400px;
@@ -22,11 +30,12 @@
      height: 200px;
      
      }
+}
 #getcam{
-   position:relative;
+   position:absolute;
     transition: .5s ease;
-    top: 70px;
-    left: 05px;
+    top: -100px;
+    left: 0px;
     right: -920px;
     bottom: -291px;
 }
@@ -82,15 +91,14 @@ body {
 }
 </style>
 </head>
-<body>
-  <nav class="navbar navbar-inverse"
+<body> <nav class="navbar navbar-inverse"
     <div class="container-fluid">
       <div class="navbar-header">
         <a href="#" class="navbar-brand">HACK ELITE</a>
       </div>
     </div>
     </nav>
-    <form>
+<form method="post" action="upload.php" enctype="multipart/form-data">
 <table class="tab" cellpadding="500px" >
 <tr>
   <td class="colom container-fluid col-xs-12 col-md-4">
@@ -99,9 +107,10 @@ body {
       <div class="flip-box-inner">
         <div class="flip-box-front">
           <img src="img.png" alt="Paris" style="width:300px;height:200px;" class="img1">
+          <p>select an image</p>
         </div>
         <div class="flip-box-back">
-          <input type="file" class="in" id="selected">
+          <input type="file" class="in" name="files" id="selected" >
         </div>
       </div>
     </div>
@@ -114,12 +123,12 @@ body {
         <div class="flip-box-front">
           <img src="img2.jpg" style="width:300px;height:200px" class="img2">
         </div>
-        <div class="flip-box-back">
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="getcam" >
-            <img src="cam.svg">
-          </button>
-          <br><br>
-          <br><br><br><br><br>
+        <div class="flip-box-back" style="padding-top: 50px;">
+          
+          <a href="./capture.html" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="getcam" >
+            <img src="cam.svg" style="padding-bottom: 2px;padding-top: 2px">
+          </a>
+          
           <p>click here to take a pic</p>
         </div>
       </div>
@@ -127,20 +136,11 @@ body {
   </div>
 </td>
 </tr><br><br><br>
-
-  <tr class="up" >
-    <td class="sub" colspan="2" >
-      <div style="margin:20px;display:flex;">
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="upload" onclick="myFunction()">Upload file</button>
-      </div>
-  </tr>
 </table>
+      <div style="margin:20px;display:flex;">
+      <input type="submit" value="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="upload"/>
+      </div>
+  
 </form>
-<script type="text/javascript">
-  function myFunction() {
-    var x = document.getElementById("selected").value;
-    //document.getElementById("demo").innerHTML = x;
-}
-</script>
 </body>
 </html>
